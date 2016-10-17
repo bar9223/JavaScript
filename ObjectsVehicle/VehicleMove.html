@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <script>
+    var Vehicle = Object.create(null);
+
+    Vehicle.name = 'pojazd';
+    Vehicle.noOfGears = 5;
+    Vehicle.currentGear = 2;
+    Vehicle.engineIsRunning = false;
+
+    console.log(Object.getPrototypeOf(Vehicle));
+    console.log(Vehicle.name);
+    console.log(Vehicle.noOfGears);
+    console.log(Vehicle.currentGear);
+    console.log(Vehicle);
+
+    Vehicle.engineStart = function () {
+      this.engineIsRunning = true;
+      console.log('Engine started');
+    };
+    Vehicle.engineStop = function () {
+      this.engineIsRunning = false;
+      console.log('Engine stopped');
+    };
+    Vehicle.drive = function () {
+      if (this.engineIsRunning === true && this.currentGear > 1) {
+        console.log(this.name + ' is driving on ' + this.currentGear + ' gear.');
+      } else {
+        throw new Error('engine need to be started and gear need to be set');
+      }
+    };
+
+    Vehicle.engineStart();
+    Vehicle.engineStop();
+
+    try {
+      Vehicle.drive();
+    } catch (error) {
+      console.log(error);
+    }
+
+
+
+
+
+
+
+
+
+

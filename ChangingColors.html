@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer quis molestie ipsum. Vivamus pulvinar libero vel
+  sodales laoreet. Fusce ut augue molestie, molestie odio sit amet, tristique nisi. Donec euismod eros in augue congue,
+  ac pellentesque metus imperdiet. Suspendisse potenti. Phasellus facilisis sed ex eget varius. Donec gravida sodales
+  tempus. Donec mattis, leo non auctor ultricies, sem quam tristique odio, euismod consequat sem orci vel est. Proin et
+  mollis ex. Nunc tempus tellus id accumsan vulputate. Maecenas in auctor nunc, quis elementum sapien. Proin nec libero
+  rutrum, ornare leo et, porta sem. Praesent a lacus vel dolor facilisis semper eu in nisi. Donec dolor lacus, interdum
+  sed neque eget, consequat ultrices erat.</p>
+<button id="button1">Color 1</button>
+<button id="button2">Color 2</button>
+<button id="button3">Color 3</button>
+<button id="button4">Color 4</button>
+<button id="button5">Color 5</button>
+
+<script>
+  /**
+   * Wykorzystując poniższą tablicę danych napisz logikę które sprawi,
+   * że po klicknięciu w każdy z przycisków kolor tekstu się zmieni.
+   *
+   * Nie możesz zmienić struktury HTML.
+   * Nie możesz dodać ani jednej zmiennej do globalnego scope'a wiliczając w to poniższą tablicę danych
+   * Pamiętaj o closures
+   */
+  (function(doc) {
+    var data = [
+      { id: 'button1', color: '#4286f4' },
+      { id: 'button2', color: '#d142f4' },
+      { id: 'button3', color: '#6bf442' },
+      { id: 'button4', color: '#f46242' },
+      { id: 'button5', color: '#42f4bc' }
+    ];
+
+    function onClickFunctionBuilder(color) {
+      return function () {
+        doc.querySelector('p').style.color = color;
+      }
+    }
+
+    for (var i = 0; i < data.length; i++) {
+      var item = data[i];
+      doc.getElementById(item.id).addEventListener('click', onClickFunctionBuilder(item.color));
+    }
+
+    data.forEach(function (item) {
+      doc.getElementById(item.id).addEventListener('click', function () {
+        doc.getElementsByTagName('p')[0].style.color = item.color;
+      });
+    });
+  }(document));
+</script>
+</body>
+</html>

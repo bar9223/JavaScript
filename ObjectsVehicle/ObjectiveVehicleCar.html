@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <script>
+    function Vehicle(name, noOfGears, currentGear) {
+      if (!this instanceof Vehicle) {
+        return new Vehicle(name, noOfGears, currentGear);
+      }
+
+      this.name = name;
+      this.noOfGears = noOfGears;
+      this.currentGear = currentGear;
+
+      this.myFunction = function () {}
+    }
+
+    Vehicle.prototype.myFunction = function () {};
+
+    function Car(name, noOfGears, currentGear, noOfSeats) {
+      if (!this instanceof Car) {
+        return new Car(name, noOfGears, currentGear, noOfSeats);
+      }
+
+      Vehicle.call(this, name, noOfGears, currentGear);
+
+      this.noOfSeats = noOfSeats;
+    }
+
+    Car.prototype = Object.create(Vehicle.prototype);
+    Car.prototype.constructor = Car;
+  </script>
+</body>
+</html>
